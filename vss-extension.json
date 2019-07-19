@@ -2,10 +2,37 @@
     "manifestVersion": 1,
     "id": "ado-source-cat",
     "publisher": "Magenic",
-    "version": "0.1.47",
+    "version": "0.1.54",
     "name": "Source Code Repository Categorization",
     "description": "A tool that adds a page to categorize source code repositories in a tree structure. This is useful for organizations with a large number of source code repositories in a single project.",
-    "public": false,
+    "public": true,
+    "icons": {
+        "default": "icon.png"
+    },
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "tags": [
+        "git",
+        "organization"
+    ],
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/Magenic/AzureDevOpsGitOrganization"
+        },
+        "license": {
+            "uri": "https://github.com/Magenic/AzureDevOpsGitOrganization"
+        },
+        "support": {
+            "uri": "https://github.com/Magenic/AzureDevOpsGitOrganization"
+        }
+    },
+    "branding": {
+        "color": "rgb(120, 190, 67)",
+        "theme": "light"
+    },
     "categories": ["Azure Repos"],
     "targets": [
         {
@@ -72,6 +99,10 @@
         },
         {
             "path": "scripts",
+            "addressable": true
+        },
+        {
+            "path": "overview.md",
             "addressable": true
         }
     ]

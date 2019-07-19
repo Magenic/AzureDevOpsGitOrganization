@@ -325,7 +325,7 @@ async function userCanEdit() {
             {
               "securityNamespaceId": "33344D9C-FC72-4d6f-ABA5-FA317101A7E9",
               "token": securityToken,
-              "permissions": 16384 /* read source control */
+              "permissions": 16384 /* build administrator permissions */
             }
           ]
         });
