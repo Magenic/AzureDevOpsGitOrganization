@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="sdk/scripts/VSS.SDK.js"></script>
+        <script src="scripts/jquery-3.4.1.min.js"></script>
+        <script src="scripts/repositorytree.js"></script>
+    </head>
+    <body>
+        <div>
+            <label>Repository:</label>
+        </div>
+        <div id="comboContainer"></div>
+        <input id="currentValue" style="visibility: hidden;"/>
+        <script>
+            VSS.init();
+            var repositoryForm = (function() {
+                var callbacks = [];
+                
+                function inputChanged() {
+                    for(var i = 0; i < callbacks.length; i++) {
+                        callbacks[i](isValid());
+                    }
+                }
+                
+                function isValid() {
+                    return !!($('#currentValue')[0].value);
+                }
+                
+                function getFormData() {
+                    return {
+                        repositoryId: $('#currentValue')[0].value
+                    };
+                }
+                
+                return {
+                    isFormValid: function() {
+                        return isValid();   
+                    },
+                    getFormData: function() {
+                        return getFormData();
+                    },
+                    attachFormChanged: function(cb) {
+                         callbacks.push(cb);
+                    },
+                    myValidation: inputChanged
+                };
+            })();
+            
+            loadRepositoryCombo($('#comboContainer'), $('#currentValue')[0], repositoryForm.myValidation);
+
+            VSS.register("Magenic.SelectRepository", repositoryForm);
+        </script>
+    </body>
+</html>

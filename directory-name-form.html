@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="sdk/scripts/VSS.SDK.js"></script>
+    </head>
+    <body>
+        <h2 class="title" id="header">Enter directory name</h2>
+        <div class="single-line-text-input" id="name-input">
+            <label>Name:</label>
+            <input id="inpName" />
+        </div>
+        <script>
+            VSS.init();
+            var directoryNameForm = (function() {
+                var callbacks = [];
+                
+                function inputChanged() {
+                    // Execute registered callbacks
+                    for(var i = 0; i < callbacks.length; i++) {
+                        callbacks[i](isValid());
+                    }
+                }
+                
+                function isValid() {
+                    // Check whether form is valid or not
+                    return !!(name.value);
+                }
+                
+                function getFormData() {
+                    // Get form values
+                    return {
+                        name: name.value
+                    };
+                }
+
+                var name = document.getElementById("inpName");
+
+                var url = new URL(window.location.href);
+                name.value = url.searchParams.get("name")
+                
+                name.addEventListener("change", inputChanged);
+                
+                return {
+                    isFormValid: function() {
+                        return isValid();   
+                    },
+                    getFormData: function() {
+                        return getFormData();
+                    },
+                    attachFormChanged: function(cb) {
+                         callbacks.push(cb);
+                    }
+                };
+            })();
+            
+            VSS.register("Magenic.DirectoryName", directoryNameForm);
+        </script>
+    </body>
+</html>

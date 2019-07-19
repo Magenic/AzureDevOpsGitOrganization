@@ -1,0 +1,16 @@
+{
+  "name": "ado-source-cat",
+  "version": "1.0.0",
+  "description": "Allows git repositories to be organized in a tree structure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["repository", "git"],
+  "author": "Kevin E. Ford",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "vss-web-extension-sdk": "^5.141.0"
+  }
+}
