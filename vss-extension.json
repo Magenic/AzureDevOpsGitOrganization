@@ -53,7 +53,13 @@
             "properties": {
                 "name": "Organize Repos",
                 "order": 99,
-                "uri": "directory-categorization.html"
+                "uri": "directory-categorization.html",
+				"iconAsset": "Magenic.ado-source-cat/icon.png",
+				"_sharedData": {
+					"assets": [
+						"Magenic.ado-source-cat/icon.png"
+						]
+				}
             },
             "restrictedTo": [
                 "member"
@@ -107,6 +113,10 @@
             "addressable": true
         },
         {
+			"path": "icon.png",
+			"addressabel": true
+		},
+		{
             "path": "images"
         },
         {
