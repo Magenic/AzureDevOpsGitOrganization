@@ -1,4 +1,4 @@
-# Azure Dev Ops Git Directory Categorization
+# Azure DevOps Git Directory Categorization
 Allows users to categorize mulitple git repositories within a single Azure DevOps project.
 
 # Viewing and Editing
