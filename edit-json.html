@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="sdk/scripts/VSS.SDK.js"></script>
+        <script src="scripts/jquery-3.4.1.min.js"></script>
+        <script src="scripts/repositorytree.js"></script>
+    </head>
+    <body>
+        <div class="multi-line-text-input" id="name-input">
+            <textarea id="currentValue" style="height: 200px; width: 350px"></textarea>
+        </div>
+        <div class="single-line-text-input" id="name-input">
+            <input id="isFormValid" value="false" style="visibility: hidden;"/>
+        </div>
+        <script>
+            VSS.init();
+            var repositoryForm = (function() {
+                var callbacks = [];
+                
+                function inputChanged() {
+                    for(var i = 0; i < callbacks.length; i++) {
+                        callbacks[i](isValid());
+                    }
+                }
+                
+                function isValid() {
+                    return $('#isFormValid')[0].value == 'true';
+                }
+                
+                function getFormData() {
+                    return {
+                        treeJson: $('#currentValue')[0].value
+                    };
+                }
+
+                async function handleJsonChange() {
+                    $('#isFormValid')[0].value = await validateJson($('#currentValue')[0].value);
+
+                    ev = document.createEvent('Event');
+                    ev.initEvent('change', true, false);
+                    $('#isFormValid')[0].dispatchEvent(ev);
+                }
+
+                $('#currentValue')[0].addEventListener("change", handleJsonChange);
+                $('#isFormValid')[0].addEventListener("change", inputChanged);
+                
+                return {
+                    isFormValid: function() {
+                        return isValid();   
+                    },
+                    getFormData: function() {
+                        return getFormData();
+                    },
+                    attachFormChanged: function(cb) {
+                         callbacks.push(cb);
+                    },
+                    myValidation: handleJsonChange
+                };
+            })();
+
+            
+            loadTreeJsonString($('#currentValue')[0], repositoryForm.myValidation);
+
+            VSS.register("Magenic.EditTreeJson", repositoryForm);
+        </script>
+    </body>
+</html>
