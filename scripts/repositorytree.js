@@ -291,7 +291,7 @@ function loadRepositoryCombo(container, valueLabel, validate) {
     repositories.forEach(element => {
       repositoryDescriptions.push(element.name);
     });
-
+    repositoryDescriptions.sort();
 
     var options = {
       width: "400px",
