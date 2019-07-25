@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "ado-source-cat",
     "publisher": "Magenic",
-    "version": "0.1.56",
+    "version": "0.2.40",
     "name": "Source Code Repository Categorization",
     "description": "A tool that adds a page to categorize git source code repositories in a tree structure. This is useful for organizations with a large number of git repositories in a single project.",
     "public": true,
@@ -88,6 +88,18 @@
             "restrictedTo": [
                 "member"
             ]
+        },
+        {
+            "id": "Magenic.EditTreeJson",
+            "type": "ms.vss-web.control",
+            "description": "Allows editing of the json for the TreeView",
+            "targets": [],
+            "properties": {
+                "uri": "edit-json.html"
+            },
+            "restrictedTo": [
+                "member"
+            ]
         }
     ],
     "scopes": ["vso.code"],
@@ -105,6 +117,10 @@
             "addressable": true
         },
         {
+            "path": "edit-json.html",
+            "addressable": true
+        },
+        {
             "path": "sdk/scripts",
             "addressable": true
         },
@@ -114,7 +130,7 @@
         },
         {
 			"path": "icon.png",
-			"addressabel": true
+			"addressable": true
 		},
 		{
             "path": "images"

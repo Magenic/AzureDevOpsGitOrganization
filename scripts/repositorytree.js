@@ -338,3 +338,95 @@ async function userCanEdit() {
   });
   return result.evaluations[0].value;
 }
+
+function editJson() {
+  VSS.getService(VSS.ServiceIds.Dialog).then(function(dialogService) {
+    var treeJsonForm;
+
+    var extensionCtx = VSS.getExtensionContext();
+    var contributionId = extensionCtx.publisherId + "." + extensionCtx.extensionId + ".Magenic.EditTreeJson";
+
+    var dialogOptions = {
+      title: "Edit Tree Json",
+      width: 450,
+      height: 350,
+      getDialogResult: function() {
+          return treeJsonForm ? treeJsonForm.getFormData() : null;
+      },
+      okCallback: function (result) {
+        if (result.treeJson != null) { 
+          var serializeNodes = result.treeJson;
+          VSS.require(["VSS/Controls", "VSS/Controls/TreeView", "VSS/Controls/StatusIndicator"], function(Controls, TreeView, StatusIndicator) {
+            var container = $("#mainBody");
+
+            var waitControlOptions = {
+              target: $("#mainBody"),
+              cancellable: true
+            };
+  
+            var waitControl = Controls.create(StatusIndicator.WaitControl, container, waitControlOptions);
+            
+            waitControl.startWait();
+
+            VSS.getService(VSS.ServiceIds.ExtensionData).then(function(dataService) {
+              dataService.setValue("Magenic.SourceDirectories", serializeNodes).then(function(value) {
+
+                var treeContainer = $('#treeContainer')[0];
+                while (treeContainer.firstChild) {
+                  treeContainer.removeChild(treeContainer.firstChild);
+                }
+
+                loadTreeView(treeContainer);
+                waitControl.endWait();
+            });
+
+            });
+          });
+        }
+      }
+    };
+
+    dialogService.openDialog(contributionId, dialogOptions).then(function(dialog) {
+      dialog.getContributionInstance("Magenic.EditTreeJson").then(function (treeJsonFormInstance) {
+        treeJsonForm = treeJsonFormInstance;
+          
+        treeJsonForm.attachFormChanged(function(isValid) {
+              dialog.updateOkButton(isValid);
+          });
+        treeJsonForm.isFormValid().then(function (isValid) {
+              dialog.updateOkButton(isValid);
+          });
+      });                            
+    });
+  });
+}
+
+function loadTreeJsonString(textAreaToLoad, validate) {
+  VSS.getService(VSS.ServiceIds.ExtensionData).then(function(dataService) {
+    dataService.getValue("Magenic.SourceDirectories").then(function(value) {
+      var folders;
+      if (typeof value === "undefined") {
+        folders = "[]";
+      } else {
+        folders = value;
+      }
+      textAreaToLoad.value = folders;
+      validate();
+    });
+  });
+}
+
+async function validateJson(jsonValue) {
+  var result = await new Promise(function(resolve, reject) {
+    VSS.require(["VSS/Controls", "VSS/Controls/TreeView"], function(Controls, TreeView) {
+      try {
+        var folders = JSON.parse(jsonValue);
+        var nodes = convertToTreeNodes(folders, Controls, TreeView);
+        resolve(true);
+      } catch (err) {
+        resolve(false);
+      }
+    });
+  });
+  return result;
+}
