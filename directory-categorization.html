@@ -7,51 +7,56 @@
     <script src="scripts/repositorytree.js"></script>
 </head>
 <body style="margin-left: 20px">
-    <script type="text/javascript">
-        VSS.init({
-            explicitNotifyLoaded: true,
+    <div id="mainBody" style="height: 100%">
+        <script type="text/javascript">
+            VSS.init({
+                explicitNotifyLoaded: true,
 
-            usePlatformScripts: true,
-            usePlatformStyles: true       
-        });
-    </script>
-    <div id="header"  style="visibility: hidden;"><h1>Repository Categorization</h1></div>
-    <div id="buttons" style="visibility: hidden;">
-        <button type="button" id="addRoot" onclick="addRootNode()" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
-            <span class="ui-button-text">Add Root Directory</span>
-        </button>
-        <button type="button" id="save" onClick="saveNodes()" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
-            <span class="ui-button-text">Save</span>
-        </button>
-    </div>
-    <div id="treeContainer" style="margin-top:20px"></div>
-    <script type="text/javascript">
-        var container = $('#treeContainer');
+                usePlatformScripts: true,
+                usePlatformStyles: true       
+            });
+        </script>
+        <div id="header"  style="visibility: hidden;"><h1>Repository Categorization</h1></div>
+        <div id="buttons" style="visibility: hidden;">
+            <button type="button" id="addRoot" onclick="addRootNode()" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
+                <span class="ui-button-text">Add Root Directory</span>
+            </button>
+            <button type="button" id="editTreeJson" onClick="editJson()" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
+                <span class="ui-button-text">Edit Tree Json</span>
+            </button>
+            <button type="button" id="save" onClick="saveNodes()" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
+                <span class="ui-button-text">Save</span>
+            </button>
+        </div>
+        <div id="treeContainer" style="margin:20px; height:650px; overflow:auto"></div>
+        <script type="text/javascript">
+            var container = $('#treeContainer');
 
-        container.bind("selectionchanged", function (e, args) {
-            var selectedNode = args.selectedNode;
-            if (selectedNode.icon != "icon icon-folder") {
-                window.top.location.href = selectedNode.tag;
-            }
-        });
-
-        jQuery(window).on('load', function () {
-            loadTreeView($('#treeContainer'));
-
-            var header = document.getElementById('header');
-            var buttons = document.getElementById('buttons');
-
-            header.style.visibility = 'visible'; 
-            
-            userCanEdit().then(function(result) {
-                if (result) {
-                    buttons.style.visibility = 'visible'; 
-                } else {
-                    buttons.style.visibility = 'none'; 
+            container.bind("selectionchanged", function (e, args) {
+                var selectedNode = args.selectedNode;
+                if (selectedNode.icon != "icon icon-folder") {
+                    window.top.location.href = selectedNode.tag;
                 }
             });
-            VSS.notifyLoadSucceeded();
-        });
-    </script>
+
+            jQuery(window).on('load', function () {
+                loadTreeView($('#treeContainer'));
+
+                var header = document.getElementById('header');
+                var buttons = document.getElementById('buttons');
+
+                header.style.visibility = 'visible'; 
+                
+                userCanEdit().then(function(result) {
+                    if (result) {
+                        buttons.style.visibility = 'visible'; 
+                    } else {
+                        buttons.style.visibility = 'none'; 
+                    }
+                });
+                VSS.notifyLoadSucceeded();
+            });
+        </script>
+    </div>
 </body>
 </html>

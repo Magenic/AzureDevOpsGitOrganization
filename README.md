@@ -1,6 +1,6 @@
-![alt tag](/icon.png?raw=true "Azure Dev Ops Git Directory Categorization")
+![alt tag](/icon.png?raw=true "Azure DevOps Git Directory Categorization")
 
-# Azure Dev Ops Git Directory Categorization
+# Azure DevOps Git Directory Categorization
 Allows users to categorize mulitple git repositories within a single Azure DevOps project.
 
 # Viewing and Editing
