@@ -286,12 +286,12 @@ function loadRepositoryCombo(container, valueLabel, validate) {
     var webContext = VSS.getWebContext();
 
     var repositories =  await gitClient.getRepositories(webContext.project.id);
+    repositories.sort((a, b) => (a.name > b.name) ? 1 : -1);
 
     var repositoryDescriptions = [];
     repositories.forEach(element => {
       repositoryDescriptions.push(element.name);
     });
-
 
     var options = {
       width: "400px",
