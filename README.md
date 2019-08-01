@@ -10,9 +10,11 @@ While any member of the organization can view the tree and attempt to navigate t
 For organizations that have a large number of repositories, there is a button to allow the json that defines the structure to be edited manually. The Json has the following structure:
 
 A folder object uses the following format:
+
 {"name":"Name to show for folder","nodeType":"folder","children": [*list of folder and repository objects*]}
 
-A repository object uses the following format
+A repository object uses the following format:
+
 {"name":"Name to show for repository","nodeType":"repository","tag":"URL to Repository"}
 
 The top level of the jason is a simple array:
@@ -20,6 +22,7 @@ The top level of the jason is a simple array:
 [*list of folder and repository objects*]
 
 Example:
+
 [
     {"name":"Folder1","nodeType":"folder","children": [
         {"name":"Repository1","nodeType":"repository","tag":"https://someUrl"}
