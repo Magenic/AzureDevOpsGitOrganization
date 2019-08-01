@@ -156,6 +156,10 @@ function addRepository(node, treeView) {
             var repository =  await gitClient.getRepository(result.repositoryId, webContext.project.id);
 
             var newNode = TreeView.TreeNode.create(repository.name);
+            
+            if (node == null) {
+              node = treeView.rootNode;
+            }
             node.addRange([newNode]);
             newNode.tag = repository.webUrl;
             node.expanded = true;
@@ -232,6 +236,10 @@ function updateNode(node, isAdd, treeView) {
 
 function addRootNode() {
   updateNode(null, true, treeViewReference)
+}
+
+function addRootRepository() {
+  addRepository(null, treeViewReference)
 }
 
 function saveNodes() {
