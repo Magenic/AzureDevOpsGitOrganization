@@ -39,6 +39,7 @@ function loadTreeView(container) {
 // Converts the source to TreeNodes
 
 function convertToTreeNodes(items, Controls, TreeView) {
+    items.sort((a, b) => (a.name > b.name) ? 1 : -1);
     return $.map(items, function (item) {
       var node = TreeView.TreeNode.create(item.name);
       if (item.nodeType === "folder") {
