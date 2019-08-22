@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "ado-source-cat",
     "publisher": "Magenic",
-    "version": "0.2.40",
+    "version": "0.2.42",
     "name": "Source Code Repository Categorization",
     "description": "A tool that adds a page to categorize git source code repositories in a tree structure. This is useful for organizations with a large number of git repositories in a single project.",
     "public": true,
@@ -14,10 +14,7 @@
             "path": "documents/overview.md"
         }
     },
-    "tags": [
-        "git",
-        "organization"
-    ],
+    "tags": ["git", "organization"],
     "screenshots": [
         {
             "path": "images/screenshot.png"
@@ -54,16 +51,12 @@
                 "name": "Organize Repos",
                 "order": 99,
                 "uri": "directory-categorization.html",
-				"iconAsset": "Magenic.ado-source-cat/icon.png",
-				"_sharedData": {
-					"assets": [
-						"Magenic.ado-source-cat/icon.png"
-						]
-				}
+                "iconAsset": "Magenic.ado-source-cat/icon.png",
+                "_sharedData": {
+                    "assets": ["Magenic.ado-source-cat/icon.png"]
+                }
             },
-            "restrictedTo": [
-                "member"
-            ]
+            "restrictedTo": ["member"]
         },
         {
             "id": "Magenic.DirectoryName",
@@ -73,9 +66,7 @@
             "properties": {
                 "uri": "directory-name-form.html?name={{myName}}"
             },
-            "restrictedTo": [
-                "member"
-            ]
+            "restrictedTo": ["member"]
         },
         {
             "id": "Magenic.SelectRepository",
@@ -85,9 +76,7 @@
             "properties": {
                 "uri": "select-repository.html"
             },
-            "restrictedTo": [
-                "member"
-            ]
+            "restrictedTo": ["member"]
         },
         {
             "id": "Magenic.EditTreeJson",
@@ -97,9 +86,7 @@
             "properties": {
                 "uri": "edit-json.html"
             },
-            "restrictedTo": [
-                "member"
-            ]
+            "restrictedTo": ["member"]
         }
     ],
     "scopes": ["vso.code"],
@@ -129,10 +116,10 @@
             "addressable": true
         },
         {
-			"path": "icon.png",
-			"addressable": true
-		},
-		{
+            "path": "icon.png",
+            "addressable": true
+        },
+        {
             "path": "images"
         },
         {

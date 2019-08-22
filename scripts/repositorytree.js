@@ -39,6 +39,7 @@ function loadTreeView(container) {
 // Converts the source to TreeNodes
 
 function convertToTreeNodes(items, Controls, TreeView) {
+    items.sort((a, b) => (a.name > b.name) ? 1 : -1);
     return $.map(items, function (item) {
       var node = TreeView.TreeNode.create(item.name);
       if (item.nodeType === "folder") {
@@ -156,6 +157,10 @@ function addRepository(node, treeView) {
             var repository =  await gitClient.getRepository(result.repositoryId, webContext.project.id);
 
             var newNode = TreeView.TreeNode.create(repository.name);
+            
+            if (node == null) {
+              node = treeView.rootNode;
+            }
             node.addRange([newNode]);
             newNode.tag = repository.webUrl;
             node.expanded = true;
@@ -234,6 +239,10 @@ function addRootNode() {
   updateNode(null, true, treeViewReference)
 }
 
+function addRootRepository() {
+  addRepository(null, treeViewReference)
+}
+
 function saveNodes() {
   VSS.getService(VSS.ServiceIds.ExtensionData).then(function(dataService) {
     var nodeObjects = convertTreeNodesToObjectsForSerialization(treeViewReference.rootNode.children);
@@ -286,13 +295,13 @@ function loadRepositoryCombo(container, valueLabel, validate) {
     var webContext = VSS.getWebContext();
 
     var repositories =  await gitClient.getRepositories(webContext.project.id);
+    repositories.sort((a, b) => (a.name > b.name) ? 1 : -1);
 
     var repositoryDescriptions = [];
     repositories.forEach(element => {
       repositoryDescriptions.push(element.name);
     });
-    repositoryDescriptions.sort();
-
+    
     var options = {
       width: "400px",
       source: repositoryDescriptions,
