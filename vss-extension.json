@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "ado-source-cat",
     "publisher": "Magenic",
-    "version": "0.2.41",
+    "version": "0.2.42",
     "name": "Source Code Repository Categorization",
     "description": "A tool that adds a page to categorize git source code repositories in a tree structure. This is useful for organizations with a large number of git repositories in a single project.",
     "public": true,
