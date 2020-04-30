@@ -10,7 +10,7 @@
   "author": "Kevin E. Ford",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "vss-web-extension-sdk": "^5.141.0"
   }
 }
